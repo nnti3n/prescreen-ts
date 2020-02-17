@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { searchCity } from '../api/request';
+import { searchCountries } from '../api/request';
 import { useDebounce } from '../api/debound';
 import { SearchImg } from '../img/search';
 
@@ -9,7 +9,7 @@ function AutoComplete() {
   const [results, setResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [showResult, setShowResult] = useState(false);
-  const [selectedCity, setSelectedCity] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState('');
 
   useEffect(() => {
     document.addEventListener("click", handleOuterClick);
@@ -18,17 +18,18 @@ function AutoComplete() {
   // set debounce to 500ms
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  useEffect(
-    () => {
-      if (debouncedSearchTerm) {
-        searchCity(debouncedSearchTerm).then(res => {
-          setResults(res);
-        });
-      } else {
-        setResults([]);
-      }
-    },
-    [debouncedSearchTerm]
+  async function fetchCountry() {
+    if (debouncedSearchTerm) {
+      const countries = await searchCountries(debouncedSearchTerm);
+      setResults(countries);
+    } else {
+      setResults([]);
+    }
+  }
+
+  useEffect(() => {
+      fetchCountry();
+    }, [debouncedSearchTerm]
   );
 
   function handleSearch(event) {
@@ -47,7 +48,7 @@ function AutoComplete() {
 
   function handleSelect(r) {
     if (r.numericCode !== -1) {
-      setSelectedCity(r.name)
+      setSelectedCountry(r.name)
     }
     setShowResult(false);
   }
@@ -74,16 +75,18 @@ function AutoComplete() {
       </div>
 
       {
-        showResult && results.length > 0 && <div className="result"><ul>
-          {results.map(result => (
-            <li key={result.numericCode} onClick={() => handleSelect(result)}>
-              {result.name}
-            </li>
-          ))}
-        </ul></div>
+        showResult && results.length > 0 && <div className="result">
+          <ul>
+            {results.map(result => (
+              <li key={result.numericCode} onClick={() => handleSelect(result)}>
+                {result.name}
+              </li>
+            ))}
+          </ul>
+        </div>
       }
       {
-        selectedCity && <div className="selected-city">{selectedCity}</div>
+        selectedCountry && <div className="selected-city">{selectedCountry}</div>
       }
     </div>
   )

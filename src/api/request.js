@@ -1,14 +1,13 @@
-export function searchCity(name) {
-  return fetch(`https://restcountries.eu/rest/v2/name/${name}?fields=name;numericCode`)
-    .then(r => r.json())
-    .then(r => {
-      if (r.status) {
-        return [{name: 'Not Found', numericCode: -1}]
-      }
-      return r
-    })
-    .catch(error => {
-      console.error(error);
-      return [];
-    });
+export async function searchCountries(name) {
+  try {
+    let rs = await fetch(`https://restcountries.eu/rest/v2/name/${name}?fields=name;numericCode`);
+    rs = await rs.json();
+    if (rs.status === 404) {
+      return [{name: 'Not Found', numericCode: -1}]
+    }
+    return rs;
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
 }
