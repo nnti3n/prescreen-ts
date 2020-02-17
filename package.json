@@ -45,6 +45,7 @@
     "@babel/polyfill": "7.6.0",
     "@babel/preset-env": "7.6.3",
     "@babel/preset-react": "7.6.3",
+    "@testing-library/react-hooks": "^3.2.1",
     "acorn": "7.1.0",
     "ajv": "6.10.2",
     "autoprefixer": "9.7.0",
