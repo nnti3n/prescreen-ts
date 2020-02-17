@@ -1,5 +1,6 @@
 import React from 'react'
 
+// It's late already, and I don't have enough time to write test for the dark theme >..<
 const themes = {
   dark: {
     backgroundColor: 'black',
@@ -27,7 +28,6 @@ function ThemeProvider({ children }) {
     setDark(isDark)
   }, [dark]);
 
-  // To toggle between dark and light modes
   const toggle = () => {
     const isDark = !dark
     localStorage.setItem('dark', JSON.stringify(isDark));
