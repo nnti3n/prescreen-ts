@@ -19,6 +19,7 @@ const initialState = {
 };
 const ThemeContext = React.createContext(initialState);
 
+// eslint-disable-next-line react/prop-types
 function ThemeProvider({ children }) {
   const [dark, setDark] = React.useState(false); // Default theme is light
 
