@@ -2,20 +2,20 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import App from './components/App';
-import './styles/styles.scss'; // Yep, that's right. You can import SASS/CSS files too! Webpack will run the associated loader and plug this into the page.
+import Root from './components/Root';
+import './styles/styles.scss';
 require('./favicon.ico'); // Tell webpack to load favicon.ico
 
 render(
-  <App />,
+  <Root />,
   document.getElementById('app')
 );
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => {
-    const NewApp = require('./components/App').default;
+  module.hot.accept('./components/Root', () => {
+    const NewRoot = require('./components/Root').default;
     render(
-      <NewApp />,
+      <NewRoot />,
       document.getElementById('app')
     );
   });

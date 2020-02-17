@@ -1,9 +1,23 @@
 import React from 'react';
 import AutoComplete from './Autocomplete';
+import { ThemeContext } from './ThemeProvider';
 
 function App() {
+  const { theme, toggle, dark } = React.useContext(ThemeContext);
+
   return <div>
-    <div className="background">
+    <button
+      type="button"
+      onClick={toggle}
+      style={{
+        backgroundColor: theme.backgroundColor,
+        color: theme.color,
+      }}
+      data-testid="toggle-theme-btn"
+    >
+      Toggle to {!dark ? 'Dark' : 'Light'} theme
+    </button>
+    <div className={`background ${dark ? 'dark' : ''}`}>
       <div className="cover">
         <img
           className="img" aria-hidden="true" alt=""

@@ -190,3 +190,32 @@
     width: 100%;
   }
 }
+
+button {
+  z-index: 3;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  border-color: transparent;
+  outline: none;
+}
+
+.dark {
+  &.background {
+    filter: brightness(0.2);
+  }
+  .table-cell {
+    background-color: gray;
+    border-color: gray;
+  }
+  input {
+    color: white;
+    &::placeholder {
+      color: white;
+    }
+  }
+  ul {
+    background-color: gray;
+    border-color: gray;
+  }
+}

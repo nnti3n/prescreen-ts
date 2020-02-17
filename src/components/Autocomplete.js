@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { searchCountries } from '../api/request';
 import { useDebounce } from '../api/debounce';
 import { SearchImg } from '../img/search';
+import { ThemeContext } from './ThemeProvider';
 
 const inputRef = React.createRef();
 
 function AutoComplete() {
+  const { dark } = React.useContext(ThemeContext);
+
   const [results, setResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [showResult, setShowResult] = useState(false);
@@ -17,16 +20,6 @@ function AutoComplete() {
 
   // set debounce to 500ms
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
-  function debounce(callback) {
-    // each call to debounce creates a new timeoutId
-    let timeoutId
-    return function() {
-      // this inner function keeps a reference to
-      // timeoutId from the function outside of it
-      clearTimeout(timeoutId)
-      timeoutId = setTimeout(callback, 800)
-    }
-  }
 
   async function fetchCountry() {
     if (debouncedSearchTerm) {
@@ -64,7 +57,10 @@ function AutoComplete() {
   }
 
   return (
-    <div className="autocomplete" ref={inputRef}>
+    <div
+      ref={inputRef}
+      className={`autocomplete ${dark ? 'dark' : ''}`}
+    >
       <div className="container">
         <div className="table">
           <div className="table-cell">
