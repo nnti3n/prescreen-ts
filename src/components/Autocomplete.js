@@ -42,7 +42,7 @@ function AutoComplete() {
     }
   };
 
-  function handleFocus() {
+  function handleClick() {
     setShowResult(true);
   }
 
@@ -67,7 +67,7 @@ function AutoComplete() {
                 type="text"
                 placeholder="Try Vietnam"
                 onChange={handleSearch}
-                onFocus={handleFocus}
+                onClick={handleClick}
               />
             </div>
           </div>
