@@ -9,3 +9,5 @@ Install [watchman](https://facebook.github.io/watchman/) via `brew install watch
 Build production: `yarn build`
 
 I use this boilerplate: <https://github.com/coryhouse/react-slingshot>
+
+Preview at <https://prescreen-ts-nntien.netlify.com/>
